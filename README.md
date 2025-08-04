@@ -2,96 +2,75 @@
 
 Project Overview / Objective
 
-Workplace safety in high-risk environments like construction sites and industrial zones is a top priority. One critical safety requirement is ensuring that workers wear helmets to prevent head injuries from falling objects or machinery. However, manual monitoring is inefficient and prone to human error, especially in large-scale operations.
+The healthcare industry is facing an urgent need to manage large volumes of complex medical data while enabling accurate, real-time clinical decision-making. Healthcare professionals often struggle with information overload when searching through extensive research and documentation, particularly in time-sensitive scenarios like emergency diagnostics or critical care.
 
-To address this, SafeGuard Corp initiated a project to build an automated helmet detection system using computer vision. Developing a binary image classification model capable of categorizing images as either “With Helmet” or “Without Helmet.” The objective was to deploy a robust, scalable solution that could operate reliably across various environmental and activity-based conditions.
+To address this, building a Retrieval-Augmented Generation (RAG) based AI solution using the Merck Manuals—a 4,000+ page medical reference. The goal was to streamline access to trusted medical knowledge by creating a system that could answer complex diagnostic, drug, and protocol-related questions, enhancing decision-making and standardizing care delivery across the organization.
 
 Approach & Implementation
 
-I took a step-by-step approach to ensure model accuracy, robustness, and practical relevance:
+I followed a structured, step-by-step approach:
 
-🔹 1. Data Setup and Initial Exploration
+🔹 1. Setup and Initial Experimentation
 
-Installed and imported all necessary Python libraries (e.g., NumPy, OpenCV, TensorFlow).
-
-
-Loaded the dataset of 631 labeled images: 311 showing workers with helmets and 320 without helmets.
+Installed and imported all necessary libraries and dependencies for NLP and LLM applications.
 
 
-Explored data characteristics, noting variability in lighting, background, worker posture, and activity types.
+Implemented a basic LLM-based Q&A pipeline, downloading and loading pre-trained models to generate answers for clinical questions like “What are the treatment options for pulmonary embolism?”
 
 
-🔹 2. Exploratory Data Analysis (EDA)
+🔹 2. Prompt Engineering for LLM Q&A
 
-Randomly visualized images from both classes to gain intuitive insights.
-
-
-Verified class balance to ensure equal representation of categories.
+Enhanced the Q&A system using prompt engineering techniques to improve context-awareness and precision in the responses.
 
 
-Applied Gaussian blur visualization and grayscale conversion to understand image features more clearly.
+Ran several question-answering experiments to benchmark performance before RAG integration.
 
 
-🔹 3. Preprocessing Pipeline
+🔹 3. Data Preparation for RAG
 
-Resized all images to a consistent shape suitable for CNN input.
-
-
-Converted images to grayscale to test model sensitivity to color.
+Loaded the Merck Manual PDF, explored the dataset structure, and verified content integrity by checking the first few pages and total page count.
 
 
-Normalized both original and grayscale datasets.
+Performed data chunking to split the manual into manageable sections, ensuring better contextual embedding.
 
 
-Split the data into training and testing sets to evaluate generalization.
+Created embeddings for the chunks and stored them in a vector database.
 
 
-🔹 4. Utility Functions and Model Evaluation Criteria
+🔹 4. Retrieval-Augmented Generation Implementation
 
-Created reusable utility functions for image processing, visualization, and prediction.
-
-
-Defined clear evaluation metrics (accuracy, confusion matrix, classification report) to assess model effectiveness.
+Built a retriever module to fetch relevant documents from the vector store based on user queries.
 
 
-🔹 5. Model Development and Experimentation
-
-Built and evaluated four models:
+Designed and implemented a response generation function using both system and user prompt templates to create high-quality, contextual responses.
 
 
-Model 1: A simple CNN to establish a baseline.
+Integrated the retriever with the LLM to enable full RAG-based Q&A, capable of answering nuanced medical questions using real-time retrieval from the Merck Manual.
 
 
-Model 2: Pre-trained VGG-16 (Base) model with frozen layers.
+🔹 5. Fine-Tuning and Evaluation
+
+Fine-tuned the LLM with healthcare-specific prompts and evaluated its performance through multiple Q&A iterations.
 
 
-Model 3: VGG-16 + Feedforward Neural Network (FFNN) to enhance learning capacity.
+Analyzed the quality and relevance of responses using both qualitative review and consistency checks.
 
 
-Model 4: VGG-16 + FFNN with Data Augmentation, introducing rotated, flipped, and scaled images to improve generalization.
+🔹 6. Insights and Business Impact
+
+Derived actionable insights around how RAG can assist with diagnostic decision-making, protocol standardization, and drug information retrieval.
 
 
-Visualized predictions after each model to interpret results qualitatively and ensure correct classification behavior.
-
-
-🔹 6. Model Selection and Testing
-
-Compared performance across all four models using test accuracy and confusion matrices.
-
-
-Selected the final model (Model 4) based on its superior generalization, especially in varied environments.
-
-
-Validated on unseen test data to confirm robustness and deployment readiness.
+Provided business recommendations to deploy this tool in hospital information systems or as part of mobile diagnostic assistants for practitioners.
 
 
 
 RESULT
 
- ✅ Successfully developed an end-to-end helmet detection system that identifies non-compliance with high accuracy, even under challenging lighting and posture conditions.
-
- ✅ The final model—VGG-16 with FFNN and Data Augmentation—achieved the best performance and can be deployed in real-world monitoring systems across industrial sites.
+ ✅ Delivered a working AI-powered diagnostic support system that leverages the Merck Manual for context-aware, real-time question answering.
  
- ✅ Delivered actionable insights and recommendations for integrating the model into live video surveillance feeds to enable real-time safety enforcement.
+ ✅ Demonstrated how RAG improves diagnostic accuracy and reduces decision fatigue, especially in critical care and emergency settings.
  
- ✅ This project showcases my ability to blend computer vision, CNN architectures, transfer learning, and augmentation to build effective AI solutions with real-world impact.
+ ✅ The prototype can be extended and integrated into clinical decision support tools, offering scalable benefits such as standardized protocols and faster treatment planning.
+ 
+ ✅ This project highlights my ability to work across LLMs, vector databases, prompt engineering, and fine-tuning for high-impact, domain-specific NLP solutions.
